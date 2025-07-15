@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- Livre du bas (bleu) -->
+    <path
+        android:fillColor="@color/indigo_primary"
+        android:pathData="M4,19h16V12H4V19zM6,14h12v1H6V14zM6,17h8v1H6V17z"/>
+    
+    <!-- Livre du milieu (bleu clair) -->
+    <path
+        android:fillColor="@color/indigo_light"
+        android:pathData="M4,12h16V7H4V12zM6,9h12v1H6V9z"/>
+    
+    <!-- Livre du haut (bleu foncé) -->
+    <path
+        android:fillColor="@color/indigo_dark"
+        android:pathData="M4,7h16V3H4V7zM6,5h8v1H6V5z"/>
+</vector>
