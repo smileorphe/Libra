@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.libra.adapter.BookAdapter;
 import com.example.libra.model.Book;
+import com.example.libra.ui.AnimatedToast;
+import com.example.libra.ui.ButtonAnimator;
 import com.example.libra.ui.SwipeToDeleteCallback;
 import com.example.libra.viewmodel.BookViewModel;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -45,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
+        // Appliquer une animation de transition à l'activité
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
 
         // Configuration de la Toolbar
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -63,6 +69,9 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
         // Configuration de l'adaptateur
         adapter = new BookAdapter();
         recyclerView.setAdapter(adapter);
+        
+        // Animer le RecyclerView au chargement initial
+        recyclerView.scheduleLayoutAnimation();
 
         // Initialisation du ViewModel
         bookViewModel = new ViewModelProvider(this).get(BookViewModel.class);
@@ -84,8 +93,9 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
                 new SwipeToDeleteCallback(this, this));
         itemTouchHelper.attachToRecyclerView(recyclerView);
 
-        // Écouteur pour le bouton d'ajout
+        // Écouteur pour le bouton d'ajout avec animation
         fabAddBook.setOnClickListener(v -> showAddEditBookDialog(null));
+        ButtonAnimator.addPressAnimation(fabAddBook);
 
         // Écouteur pour les clics sur les éléments de la liste
         adapter.setOnItemClickListener(book -> showAddEditBookDialog(book));
@@ -154,13 +164,23 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
             editTextYear.setText(String.valueOf(book.getYear()));
         }
 
-        // Créer le dialogue
+        // Créer le dialogue avec animation
         AlertDialog dialog = builder.create();
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        }
         
         // Configurer les boutons
-        view.findViewById(R.id.button_cancel).setOnClickListener(v -> dialog.dismiss());
+        View cancelButton = view.findViewById(R.id.button_cancel);
+        View saveButton = view.findViewById(R.id.button_save);
         
-        view.findViewById(R.id.button_save).setOnClickListener(v -> {
+        // Ajouter des animations aux boutons
+        ButtonAnimator.addPressAnimation(cancelButton);
+        ButtonAnimator.addPressAnimation(saveButton);
+        
+        cancelButton.setOnClickListener(v -> dialog.dismiss());
+        
+        saveButton.setOnClickListener(v -> {
             // Récupérer les valeurs des champs
             String title = Objects.requireNonNull(editTextTitle.getText()).toString().trim();
             String author = Objects.requireNonNull(editTextAuthor.getText()).toString().trim();
@@ -209,13 +229,13 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
                     // Créer un nouveau livre
                     Book newBook = new Book(title, author, year);
                     bookViewModel.insert(newBook);
-                    Toast.makeText(MainActivity.this, R.string.book_saved, Toast.LENGTH_SHORT).show();
+                    AnimatedToast.show(MainActivity.this, R.string.book_saved, Toast.LENGTH_SHORT);
                 } else {
                     // Mettre à jour le livre existant
                     Book updatedBook = new Book(title, author, year);
                     updatedBook.setId(book.getId());
                     bookViewModel.update(updatedBook);
-                    Toast.makeText(MainActivity.this, R.string.book_saved, Toast.LENGTH_SHORT).show();
+                    AnimatedToast.show(MainActivity.this, R.string.book_saved, Toast.LENGTH_SHORT);
                 }
                 dialog.dismiss();
             }
@@ -250,7 +270,7 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
                 .setMessage(R.string.confirm_delete_all)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
                     bookViewModel.deleteAll();
-                    Toast.makeText(this, R.string.all_books_deleted, Toast.LENGTH_SHORT).show();
+                    AnimatedToast.show(this, R.string.all_books_deleted, Toast.LENGTH_SHORT);
                 })
                 .setNegativeButton(android.R.string.no, null)
                 .show();
@@ -261,6 +281,19 @@ public class MainActivity extends AppCompatActivity implements SwipeToDeleteCall
         // Supprimer le livre lorsqu'il est swipé
         Book book = adapter.getBookAt(position);
         bookViewModel.delete(book);
-        Toast.makeText(this, R.string.book_deleted, Toast.LENGTH_SHORT).show();
+        AnimatedToast.show(this, R.string.book_deleted, Toast.LENGTH_SHORT);
+        
+        // Animer la RecyclerView après la suppression
+        RecyclerView recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutAnimation(AnimationUtils.loadLayoutAnimation(this, 
+                R.anim.layout_animation_from_bottom));
+        recyclerView.scheduleLayoutAnimation();
+    }
+    
+    @Override
+    public void finish() {
+        super.finish();
+        // Appliquer une animation de sortie
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
     }
 }

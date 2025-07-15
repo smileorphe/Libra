@@ -1,14 +1,58 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.Libra" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Couleurs principales -->
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorAccent">@color/accent</item>
+        
+        <!-- Couleurs de fond et de surface -->
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        
+        <!-- Couleurs de texte -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
+        <item name="android:textColorHint">@color/gray_medium</item>
+        
+        <!-- Configuration de la barre de statut -->
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/primary</item>
+        <item name="android:windowBackground">@color/background</item>
+        
+        <!-- Animations -->
+        <item name="android:windowAnimationStyle">@style/AppTheme.WindowTransition</item>
+        
+        <!-- Styles pour les composants Material -->
+        <item name="materialButtonStyle">@style/ButtonStyle</item>
+        <item name="textInputStyle">@style/TextInputStyle</item>
+        <item name="dividerColor">@color/gray_light</item>
+        <item name="dividerHorizontal">@color/gray_light</item>
+        <item name="dividerVertical">@color/gray_light</item>
     </style>
 
     <style name="Theme.Libra" parent="Base.Theme.Libra" />
     
     <!-- Styles pour AppBar et Popup -->
-    <style name="Theme.Libra.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+    <style name="Theme.Libra.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar">
+        <item name="colorPrimary">@color/blue_primary</item>
+        <item name="android:textColorPrimary">@color/text_light</item>
+        <item name="android:background">@color/blue_primary</item>
+    </style>
     
-    <style name="Theme.Libra.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+    <style name="Theme.Libra.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
+        <item name="colorSurface">@color/surface</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:background">@color/white</item>
+    </style>
+    
+    <!-- Style pour les champs de texte -->
+    <style name="TextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/blue_primary</item>
+        <item name="hintTextColor">@color/gray_medium</item>
+        <item name="android:textColorHint">@color/gray_medium</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxBackgroundColor">@color/white</item>
+    </style>
 </resources>
