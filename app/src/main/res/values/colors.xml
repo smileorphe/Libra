@@ -3,21 +3,26 @@
     <!-- Palette Principale -->
     <color name="black">#121212</color> <!-- Noir Profond (Texte Principal) -->
     <color name="white">#FFFFFF</color> <!-- Blanc Neutre (Arrière-plan) -->
-    <color name="gray_light">#E0E0E0</color> <!-- Gris Clair (Bordures/Séparateurs) -->
+    <color name="gray_light">#F5F5F5</color> <!-- Gris Très Clair (Fond de carte) -->
     
-    <!-- Accents & Actions -->
-    <color name="blue_primary">#1A73E8</color> <!-- Bleu Vif (Boutons Principaux) -->
-    <color name="blue_light">#4285F4</color> <!-- Bleu Google-like (variante) -->
+    <!-- Nouvelle palette moderne -->
+    <color name="indigo_primary">#4F4FD9</color> <!-- Bleu Indigo (Couleur principale) -->
+    <color name="indigo_dark">#3F3FC7</color> <!-- Bleu Indigo foncé -->
+    <color name="indigo_light">#6B6BE3</color> <!-- Bleu Indigo clair -->
     <color name="gray_medium">#757575</color> <!-- Gris Moyen (Texte Secondaire) -->
-    <color name="red_action">#EA4335</color> <!-- Rouge Google (Liens d'Action) -->
-    <color name="orange_action">#FBBC05</color> <!-- Jaune-orange (Liens d'Action alternatifs) -->
+    <color name="gray_background">#F8F8F8</color> <!-- Gris très clair pour fond -->
+    <color name="card_background">#FFFFFF</color> <!-- Blanc pour les cartes -->
     
     <!-- Couleurs du thème -->
-    <color name="primary">#1A73E8</color> <!-- Bleu Vif comme couleur principale -->
-    <color name="primary_dark">#0D47A1</color> <!-- Bleu foncé pour la barre de statut -->
-    <color name="secondary">#757575</color> <!-- Gris Moyen comme couleur secondaire -->
-    <color name="background">#FFFFFF</color> <!-- Blanc comme arrière-plan -->
+    <color name="primary">#4F4FD9</color> <!-- Indigo comme couleur principale -->
+    <color name="primary_dark">#3F3FC7</color> <!-- Indigo foncé pour la barre de statut -->
+    <color name="secondary">#6B6BE3</color> <!-- Indigo clair comme couleur secondaire -->
+    <color name="background">#F8F8F8</color> <!-- Gris très clair comme arrière-plan -->
     <color name="surface">#FFFFFF</color> <!-- Blanc pour les surfaces -->
+    
+    <!-- Couleurs d'accent -->
+    <color name="accent_green">#4CAF50</color> <!-- Vert pour validation -->
+    <color name="accent_red">#F44336</color> <!-- Rouge pour suppression/erreur -->
     <color name="accent">#EA4335</color> <!-- Rouge Google comme accent -->
     <color name="text_primary">#121212</color> <!-- Noir Profond pour le texte principal -->
     <color name="text_secondary">#757575</color> <!-- Gris Moyen pour le texte secondaire -->
@@ -30,4 +35,8 @@
     <color name="purple_700">#0D47A1</color>
     <color name="teal_200">#EA4335</color>
     <color name="teal_700">#FBBC05</color>
+    
+    <!-- Couleurs manquantes référencées dans d'autres fichiers -->
+    <color name="red_action">#F44336</color> <!-- Même que accent_red -->
+    <color name="blue_primary">#4F4FD9</color> <!-- Même que indigo_primary -->
 </resources>
